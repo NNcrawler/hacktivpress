@@ -1,4 +1,5 @@
 const Models = require('../models/all-models');
+const mongoose = require('mongoose');
 
 const response = {
   message: 'berhasil'
@@ -17,6 +18,28 @@ module.exports = {
     .then((article) => {
       response.article = article;
       res.send(response);
+    })
+    .catch((err) => {
+      response.message = 'gagal';
+      res.send(response);
+      response.message = 'berhasil';
+    })
+  },
+  update(req, res) {
+    Models.Article.findOne({_id: mongoose.Types.ObjectId(req.body.articleId)})
+    .then((article) => {
+      if(article) {
+        article.title = req.body.title;
+        article.content = req.body.content;
+        article.category = req.body.category;
+        return article.save()
+      } else {
+        throw 'Not Found';
+      }
+    })
+    .then((article) => {
+      response.article = article;
+      res.send(response)
     })
     .catch((err) => {
       response.message = 'gagal';
