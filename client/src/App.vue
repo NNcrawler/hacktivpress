@@ -1,7 +1,8 @@
 <template>
   <div id="app">
+
+    <img src="./assets/logo.png"><span class="logo">-BLOG</span>
     <navRoute/>
-    <img src="./assets/logo.png">
     <router-view/>
   </div>
 </template>
@@ -18,6 +19,9 @@ export default {
 </script>
 
 <style>
+.logo{
+  font-size: 100px;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -12,16 +12,7 @@
       <label for="exampleInputPassword1">Password</label>
       <input v-model="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
     </div>
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input v-model="name" type="text" class="form-control" id="name" placeholder="Name">
-      <small id="emailHelp" class="form-text text-muted">Your tagline will be shown in your articles.</small>
-    </div>
-    <div class="form-group">
-      <label for="tagline">Tagline</label>
-      <input v-model="tagline" type="text" class="form-control" id="tagline" placeholder="Your moto here">
-    </div>
-    <button @click="register" type="button" name="button">Register</button>
+    <button @click="login" type="button" name="button">Login</button>
   </div>
 </template>
 
@@ -31,31 +22,20 @@ export default {
     return {
       email: '',
       password: '',
-      name: '',
-      tagline: '',
       error: '',
     };
   },
   methods: {
-    register() {
-      this.error = '';
-      this.$auth.createUserWithEmailAndPassword(this.email, this.password)
+    login() {
+      this.$auth.signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
-          const passedData = {
-            email: this.email,
-            name: this.name,
-            tagline: this.tagline,
-          };
-          this.$store.commit('changeUser', this.name);
-          this.$axios.post('/user', passedData)
+          this.$axios.get(`/user/${this.email}`)
             .then((response) => {
-              if (response.data.message === 'berhasil') {
-                this.$router.push({ name: 'home' });
-              }
+              const data = response.data;
+              this.$store.commit('changeUser', data.data.name);
+              this.$router.push({ name: '' });
             })
             .catch((err) => {
-              // eslint-disable-next-line
-              console.log(err);
               this.error = err;
             });
         })

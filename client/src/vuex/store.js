@@ -12,7 +12,13 @@ const store = new Vuex.Store({
   mutations: {
     changeUser(state, name) {
       // eslint-disable-next-line
-      state.user.name = name;
+      if (name){
+      // eslint-disable-next-line
+        state.user.name = name;
+      } else {
+      // eslint-disable-next-line
+        state.user.name = '';
+      }
     },
   },
 });

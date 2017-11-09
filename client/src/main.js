@@ -26,6 +26,28 @@ Vue.prototype.$auth = firebase.auth();
 Vue.prototype.$store = store;
 Vue.prototype.$axios = axios;
 
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    // User is signed in.
+    axios.get(`/user/${user.email}`)
+      .then((response) => {
+        const data = response.data;
+        store.commit('changeUser', data.data.name);
+      });
+    // var displayName = user.displayName;
+    // var email = user.email;
+    // var emailVerified = user.emailVerified;
+    // var photoURL = user.photoURL;
+    // var isAnonymous = user.isAnonymous;
+    // var uid = user.uid;
+    // var providerData = user.providerData;
+    // ...
+  } else {
+    // User is signed out.
+    // ...
+  }
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
