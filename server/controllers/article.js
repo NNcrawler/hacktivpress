@@ -46,5 +46,17 @@ module.exports = {
       res.send(response);
       response.message = 'berhasil';
     })
+  },
+  getAll(req, res) {
+    Models.Article.find({})
+    .then((articles) => {
+      response.articles = articles;
+      res.send(response)
+    })
+    .catch((err) => {
+      response.message = 'gagal';
+      res.send(response)
+      response.message = 'berhasil';
+    })
   }
 };
