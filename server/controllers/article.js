@@ -74,5 +74,20 @@ module.exports = {
       res.send(response);
       response.message = 'berhasil';
     })
+  },
+  remove(req, res) {
+    Models.Article.deleteOne({_id: mongoose.Types.ObjectId(req.params.articleId)})
+    .then((article) => {
+      if (!article) {
+        throw 'Not Found';
+      }
+      // console.log(article);
+      res.send(response)
+    })
+    .catch((err) => {
+      response.message = 'gagal';
+      res.send(response);
+      response.message = 'berhasil';
+    })
   }
 };
