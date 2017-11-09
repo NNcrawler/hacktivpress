@@ -13,6 +13,7 @@
   "dependencies": {
     "@firebase/app": "^0.1.2",
     "@firebase/auth": "^0.2.1",
+    "axios": "^0.17.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

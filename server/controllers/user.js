@@ -24,4 +24,16 @@ module.exports = {
       dataResponse.message = 'berhasil';
     })
   },
+  getUserData(req, res) {
+    Models.User.findOne({ email: req.params.email })
+    .then((user) => {
+      dataResponse.data = user;
+      res.send(dataResponse);
+    })
+    .catch((err) => {
+      dataResponse.message = 'gagal';
+      res.send(dataResponse);
+      dataResponse.message = 'berhasil';
+    })
+  },
 };

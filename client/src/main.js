@@ -3,8 +3,12 @@
 import Vue from 'vue';
 import firebase from '@firebase/app';
 import '@firebase/auth';
+import axios from 'axios';
 import App from './App';
 import router from './router';
+import store from './vuex/store';
+
+axios.defaults.baseURL = 'http://localhost:3000/';
 
 const config = {
   apiKey: 'AIzaSyDxiBusDXY7HgKjyIhXzSgccvaqWSDsYwc',
@@ -19,6 +23,8 @@ firebase.initializeApp(config);
 Vue.config.productionTip = false;
 
 Vue.prototype.$auth = firebase.auth();
+Vue.prototype.$store = store;
+Vue.prototype.$axios = axios;
 
 /* eslint-disable no-new */
 new Vue({
