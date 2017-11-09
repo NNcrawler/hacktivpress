@@ -5,5 +5,6 @@ const controllers = require('../controllers/article');
 router.post('/', controllers.create);
 router.put('/', controllers.update);
 router.get('/all', controllers.getAll);
+router.get('/:articleId', controllers.getById);
 
 module.exports = router;

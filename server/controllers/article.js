@@ -58,5 +58,21 @@ module.exports = {
       res.send(response)
       response.message = 'berhasil';
     })
+  },
+  getById(req, res) {
+    Models.Article.findOne({_id: mongoose.Types.ObjectId(req.params.articleId)})
+    .then((article) => {
+      if(article) {
+        response.article = article;
+        res.send(response);
+      } else {
+        throw 'Not found';
+      }
+    })
+    .catch((err) => {
+      response.message = 'gagal';
+      res.send(response);
+      response.message = 'berhasil';
+    })
   }
 };
